@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>F1 Survival – Moto Layout</title>
+
+  <style>
+    section {
+  animation: fadeInSection 1.2s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInSection {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+    .btn-red {
+  animation: pulse 2.5s infinite ease-in-out;
+  position: relative;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px rgba(255,40,40,0.3); }
+  50% { box-shadow: 0 0 23px rgba(255,40,40,0.8); }
+  100% { box-shadow: 0 0 10px rgba(255,40,40,0.3); }
+}
+
+    /* 스크롤 진입 효과 공통 */
+.fade-up, .slide-left, .slide-right {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.9s ease-out;
+}
+
+.slide-left { transform: translateX(-40px); }
+.slide-right { transform: translateX(40px); }
+
+/* 화면에 등장할 때 클래스 추가됨 */
+.show {
+  opacity: 1 !important;
+  transform: translate(0,0) !important;
+}
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:"Noto Sans KR",system-ui,sans-serif;
+      background:#111;
+      color:#fff;
+      line-height:1.6;
+    }
+    a{text-decoration:none;color:inherit;}
+
+    .page-wrap{
+      max-width:1280px;
+      margin:0 auto;
+      background:#f3f3f3;
+      box-shadow:0 0 60px rgba(0,0,0,0.7);
+    }
+
+    /* ========= 상단 HERO ========= */
+    header{
+      position:relative;
+      background:linear-gradient(to bottom,#363a3f 0,#1f2226 45%,#16181b 100%);
+      color:#fff;
+      overflow:hidden;
+    }
+
+    .top-nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 40px;
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:0.14em;
+    }
+    .nav-left{font-weight:700;font-size:18px;}
+    .nav-menu{
+      display:flex;
+      gap:26px;
+      align-items:center;
+    }
+    .nav-menu a{
+      opacity:0.8;
+    }
+    .nav-menu a.active{
+      background:#ff2b2b;
+      padding:6px 14px;
+      border-radius:3px;
+      font-weight:700;
+      opacity:1;
+    }
+    .nav-signin{
+      border:1px solid rgba(255,255,255,0.6);
+      padding:6px 14px;
+      border-radius:3px;
+      font-size:11px;
+    }
+
+    .hero-inner{
+      display:grid;
+      grid-template-columns:1.2fr 1.4fr;
+      padding:40px 40px 70px;
+      gap:30px;
+      align-items:center;
+    }
+
+    .hero-about{
+      background:rgba(0,0,0,0.45);
+      padding:26px 26px 30px;
+      border-radius:6px;
+      border:1px solid rgba(255,255,255,0.08);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-about::after{
+      content:"";
+      position:absolute;
+      inset:22px;
+      border:2px solid rgba(255,0,0,0.65);
+      border-right:none;
+      border-bottom:none;
+      pointer-events:none;
+    }
+
+    .hero-about-label{
+      font-size:12px;
+      letter-spacing:0.25em;
+      text-transform:uppercase;
+      color:#ffb3a3;
+      margin-bottom:10px;
+    }
+
+    .hero-about h1{
+      font-size:32px;
+      font-weight:900;
+      line-height:1.25;
+      margin-bottom:10px;
+    }
+
+    .hero-about-sub{
+      font-size:12px;
+      color:#e5e5e5;
+      margin-bottom:12px;
+    }
+
+    .hero-about-main{
+      font-size:13px;
+      color:#f6f6f6;
+      margin-bottom:20px;
+    }
+
+    .hero-tagline{
+      font-size:11px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:#ffb6a3;
+      margin-bottom:18px;
+    }
+
+    .btn-red{
+      display:inline-block;
+      padding:10px 32px;
+      background:#ff2b2b;
+      color:#fff;
+      font-weight:800;
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+      border-radius:4px;
+      box-shadow:0 12px 26px rgba(0,0,0,0.6);
+      position:relative;
+      overflow:hidden;
+      cursor:pointer;
+    }
+    .btn-red::after{
+      content:"";
+      position:absolute;
+      top:0;left:-40%;
+      width:40%;height:100%;
+      background:linear-gradient(120deg,transparent,rgba(255,255,255,0.8),transparent);
+      transform:translateX(-100%);
+      opacity:0;
+    }
+    .btn-red:hover::after{
+      opacity:1;
+      animation:shine 0.8s ease-out;
+    }
+
+    .hero-photo-wrap{
+      position:relative;
+      height:340px;
+    }
+    .hero-main-photo{
+      position:absolute;
+      inset:0;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 26px 80px rgba(0,0,0,0.85);
+    }
+    .hero-main-photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .btn-vote{
+      position:absolute;
+      left:50%;
+      bottom:22px;
+      transform:translateX(-50%);
+    }
+
+    /* ========= SECTION 2 – EXTREME FACTS ========= */
+    .section-grey{
+      background:#25272a;
+      color:#fff;
+      padding:50px 40px 60px;
+      display:grid;
+      grid-template-columns:1.2fr 1.4fr;
+      gap:30px;
+    }
+
+    .sec2-title{
+      font-size:26px;
+      font-weight:900;
+      margin-bottom:12px;
+    }
+    .sec2-title::after{
+      content:"";
+      display:block;
+      width:70px;
+      height:3px;
+      margin-top:6px;
+      background:#ff2b2b;
+    }
+    .sec2-sub{
+      font-size:13px;
+      margin-bottom:22px;
+    }
+    .sec2-list-title{
+      font-size:13px;
+      font-weight:900;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .sec2-list{
+      font-size:13px;
+      list-style:none;
+    }
+    .sec2-list li{
+      margin-bottom:8px;
+      position:relative;
+      padding-left:14px;
+    }
+    .sec2-list li::before{
+      content:"•";
+      position:absolute;
+      left:0;top:0;
+      color:#ffb3a3;
+    }
+
+    .sec2-images{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      grid-auto-rows:150px;
+      gap:14px;
+    }
+    .img-card{
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 18px 50px rgba(0,0,0,0.85);
+      position:relative;
+    }
+    .img-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transition:transform 0.4s ease;
+    }
+    .img-card:hover img{transform:scale(1.06);}
+    .img-caption{
+      position:absolute;
+      left:0;
+      bottom:0;
+      width:100%;
+      padding:8px 12px;
+      background:linear-gradient(to top,rgba(0,0,0,0.85),transparent);
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:0.18em;
+    }
+
+    /* ========= SECTION 3 – WHITE (ABOUT + LOSE 4 KILOS) ========= */
+    .section-white{
+      background:#f5f5f5;
+      color:#111;
+      padding:60px 40px 70px;
+      position:relative;
+      overflow:hidden;
+    }
+    /* 배경에 가벼운 텍스처 + 대각선 */
+    .section-white::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(135deg,rgba(0,0,0,0.03) 0,transparent 45%),
+        linear-gradient(-135deg,rgba(255,43,43,0.08) 0,transparent 55%);
+      opacity:1;
+      pointer-events:none;
+      z-index:0;
+    }
+    .section-white > *{position:relative;z-index:1;}
+
+    .white-top{
+      display:grid;
+      grid-template-columns:1.2fr 1.3fr;
+      gap:40px;
+      align-items:flex-start;
+      margin-bottom:50px;
+    }
+    .white-top h2,
+    .register-box h3,
+    .white-bottom h3{
+      position:relative;
+      text-transform:uppercase;
+      font-weight:900;
+    }
+    .white-top h2{
+      font-size:22px;
+      margin-bottom:10px;
+    }
+    .register-box h3{
+      font-size:20px;
+      margin-bottom:8px;
+    }
+    .white-bottom h3{
+      font-size:24px;
+      color:#f24926;
+      margin-bottom:14px;
+    }
+    /* 제목 밑줄 포인트 */
+    .white-top h2::after,
+    .register-box h3::after,
+    .white-bottom h3::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:60px;
+      height:3px;
+      background:#ff2b2b;
+    }
+
+    .white-top p{
+      font-size:14px;
+    }
+
+    .register-box{
+      text-align:right;
+    }
+    .register-box p{
+      font-size:13px;
+      margin-bottom:18px;
+      color:#444;
+    }
+
+    .white-bottom{
+      display:grid;
+      grid-template-columns:1.3fr 1.2fr;
+      gap:40px;
+      align-items:center;
+      margin-top:10px;
+    }
+    .white-bottom p{
+      font-size:14px;
+      color:#333;
+    }
+
+    .white-img{
+      border-radius:22px;
+      overflow:hidden;
+      position:relative;
+      box-shadow:0 24px 70px rgba(0,0,0,0.7);
+    }
+    /* 이미지 뒤 빨간 세로 띠 */
+    .white-img::before{
+      content:"";
+      position:absolute;
+      right:-40px;
+      top:8%;
+      width:80px;
+      height:84%;
+      background:linear-gradient(to bottom,#ff2b2b,#ff7a4a);
+      opacity:0.55;
+      z-index:-1;
+      border-radius:40px;
+    }
+    .white-img img{
+      width:100%;height:100%;object-fit:cover;
+      display:block;
+    }
+
+    /* ========= SECTION 4 – 카드 (VICTORY) ========= */
+    .section-cards{
+      background:#f3f3f3;
+      padding:40px 40px 70px;
+    }
+    .cards-title{
+      text-align:center;
+      font-size:20px;
+      font-weight:900;
+      text-transform:uppercase;
+      margin-bottom:24px;
+    }
+    .cards-title::after{
+      content:"";
+      display:block;
+      width:100px;
+      height:3px;
+      margin:8px auto 0;
+      background:#ff2b2b;
+    }
+    .card-row{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:22px;
+    }
+    .card{
+      background:#111;
+      color:#fff;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 16px 50px rgba(0,0,0,0.85);
+      display:flex;
+      flex-direction:column;
+    }
+    .card-img{
+      height:170px;
+      overflow:hidden;
+    }
+    .card-img img{
+      width:100%;height:100%;object-fit:cover;
+    }
+    .card-body{
+      padding:14px 16px 18px;
+      font-size:12px;
+    }
+    .card-body .card-title{
+      font-size:14px;
+      font-weight:900;
+      line-height:1.4;
+      margin-bottom:8px;
+      text-transform:uppercase;
+    }
+    .card-btn{
+      margin:0 16px 16px;
+      align-self:flex-start;
+      font-size:10px;
+    }
+
+    /* ========= SECTION 5 – INTERESTING THINGS ========= */
+    .section-dark-alt{
+      background:#1f2226;
+      color:#fff;
+      padding:60px 40px 70px;
+      display:grid;
+      grid-template-columns:1.3fr 1.1fr;
+      gap:40px;
+      align-items:center;
+    }
+    .section-dark-alt h2{
+      font-size:24px;
+      font-weight:900;
+      margin-bottom:12px;
+      text-transform:uppercase;
+    }
+    .section-dark-alt h2::after{
+      content:"";
+      display:block;
+      width:80px;
+      height:3px;
+      margin-top:6px;
+      background:#ff2b2b;
+    }
+    .section-dark-alt p{
+      font-size:14px;
+      margin-bottom:10px;
+    }
+    .section-dark-alt .fact{
+      font-size:13px;
+      margin-top:10px;
+    }
+    .dark-alt-img{
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 24px 80px rgba(0,0,0,0.9);
+    }
+    .dark-alt-img img{
+      width:100%;height:100%;object-fit:cover;
+    }
+
+    /* ========= SECTION 6 – F1 팀은 왜 적은가 ========= */
+    .section-teams{
+      background:#f3f3f3;
+      color:#111;
+      padding:60px 40px 70px;
+    }
+    .section-teams h2{
+      text-align:center;
+      font-size:24px;
+      font-weight:900;
+      margin-bottom:30px;
+    }
+    .section-teams h2::after{
+      content:"";
+      display:block;
+      width:120px;
+      height:3px;
+      margin:8px auto 0;
+      background:#ff2b2b;
+    }
+    .teams-grid{
+      background:linear-gradient(135deg,#f24926,#ff905d);
+      border-radius:18px;
+      padding:60px;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:32px;
+      color:#fff;
+      box-shadow:0 30px 90px rgba(242,73,38,0.9);
+    }
+    .teams-col-title{
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+    .teams-body{
+      font-size:13px;
+      line-height:1.9;
+      margin-bottom:18px;
+    }
+
+    .teams-cta-wrap{
+      text-align:center;
+      margin-top:40px;
+    }
+    .teams-cta-wrap p{
+      font-size:14px;
+      margin-top:8px;
+      color:#333;
+    }
+
+    /* ========= SECTION 7 – DRIVERS & CRASH ========= */
+    .section-drivers{
+      background:#1a1c20;
+      color:#fff;
+      padding:70px 40px 80px;
+    }
+    .drivers-block{
+      display:grid;
+      grid-template-columns:1.2fr 1.3fr;
+      gap:32px;
+      align-items:center;
+      margin-bottom:50px;
+    }
+    .drivers-img{
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 26px 90px rgba(0,0,0,0.95);
+    }
+    .drivers-img img{
+      width:100%;height:100%;object-fit:cover;
+    }
+    .driver-tag{
+      font-size:11px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:#ffb6a3;
+      margin-bottom:6px;
+    }
+    .driver-name{
+      font-size:22px;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+    .driver-text{
+      font-size:14px;
+    }
+
+    .crash-banner{
+      margin-top:20px;
+      position:relative;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 26px 90px rgba(0,0,0,0.95);
+    }
+    .crash-banner img{
+      width:100%;height:360px;object-fit:cover;
+      display:block;
+    }
+    .crash-text{
+      position:absolute;
+      left:50%;
+      top:34%;
+      transform:translateX(-50%);
+      text-align:center;
+      font-size:20px;
+      font-weight:900;
+      line-height:1.6;
+      text-shadow:0 0 20px rgba(0,0,0,1);
+    }
+    .crash-label{
+      position:absolute;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%);
+      padding:6px 22px;
+      border-radius:999px;
+      background:linear-gradient(135deg,#f24926,#ff905d);
+      font-size:11px;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      font-weight:800;
+    }
+
+    /* ========= SECTION 8 – 마지막 문장 ========= */
+    .section-quote-final{
+      background:#111;
+      color:#fff;
+      padding:60px 40px 70px;
+      text-align:center;
+    }
+    .section-quote-final .label{
+      font-size:11px;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      color:#b3b3b3;
+      margin-bottom:14px;
+    }
+    .section-quote-final .main{
+      font-size:24px;
+      font-weight:900;
+      line-height:1.9;
+      margin-bottom:20px;
+    }
+
+    /* ========= CONTACTS ========= */
+    footer{
+      background:#1c1e21;
+      color:#fff;
+      padding:50px 40px 70px;
+      display:grid;
+      grid-template-columns:1.2fr 1fr;
+      gap:40px;
+    }
+    footer h2{
+      font-size:20px;
+      font-weight:900;
+      margin-bottom:16px;
+      text-transform:uppercase;
+    }
+    .contact-form{
+      display:grid;
+      gap:10px;
+    }
+    .contact-form input,
+    .contact-form textarea{
+      width:100%;
+      padding:8px 10px;
+      border-radius:3px;
+      border:none;
+      font-size:13px;
+      background:#2a2d31;
+      color:#fff;
+    }
+    .contact-form textarea{min-height:80px;resize:vertical;}
+    .footer-info{
+      font-size:12px;
+    }
+    .footer-info strong{
+      display:block;
+      margin-bottom:8px;
+    }
+
+    .footer-bottom{
+      grid-column:1 / -1;
+      margin-top:26px;
+      display:flex;
+      justify-content:space-between;
+      font-size:11px;
+      opacity:0.7;
+      border-top:1px solid rgba(255,255,255,0.08);
+      padding-top:10px;
+    }
+
+    @keyframes shine{
+      from{transform:translateX(-100%);}
+      to{transform:translateX(260%);}
+    }
+
+    @media(max-width:900px){
+      .hero-inner,
+      .section-grey,
+      .white-top,
+      .white-bottom,
+      .section-dark-alt,
+      .section-teams .teams-grid,
+      .section-drivers,
+      footer{
+        grid-template-columns:1fr;
+      }
+      .page-wrap{margin:0;}
+      .card-row{grid-template-columns:1fr;}
+      .section-teams .teams-grid{padding:40px 20px;}
+      .drivers-block{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <header>
+    <div class="top-nav">
+      <div class="nav-left">F1 SURVIVAL</div>
+      <div class="nav-menu">
+        <a href="#" class="active">PROJECT</a>
+        <a href="#">PHYSICS</a>
+        <a href="#">DRIVERS</a>
+        <a href="#">TEAMS</a>
+        <a href="#">FACTS</a>
+        <a href="#">CONTACTS</a>
+        <span class="nav-signin">SIGN IN</span>
+      </div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-about">
+        <div class="hero-about-label">ABOUT PROJECT</div>
+        <h1>레이싱의 극한, 인간의 한계</h1>
+        <p class="hero-about-sub">
+          레이싱은 단순한 속도 경쟁이 아니다. 시속 300km가 넘는 속도,
+          5G에 달하는 압력, 최대 60도의 열기 속에서 드라이버는 매 순간
+          생존을 위해 싸운다.
+        </p>
+        <p class="hero-about-main">
+          그 안에서 인간의 집중력, 체력, 정신력은 끝까지 몰린다.
+          이 프로젝트는 그 극한의 환경 속에서 드라이버들이 어떻게 버티고,
+          어떻게 살아남는지에 대한 기록이다.
+        </p>
+        <div class="hero-tagline">RACING · SURVIVAL · ENGINE · HEAT</div>
+        <span class="btn-red">SUBSCRIBE TO SURVIVAL</span>
+      </div>
+
+      <div class="hero-photo-wrap">
+        <div class="hero-main-photo">
+          <img src="f1.jpg" alt="F1 hero">
+        </div>
+        <span class="btn-red btn-vote">SURVIVE</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- EXTREME FACTS -->
+  <section class="section-grey">
+    <div>
+      <h2 class="sec2-title">EXTREME FACTS</h2>
+      <p class="sec2-sub">
+        레이스카 내부의 온도는 최대 60도까지 올라가고, 콕핏 안에서 드라이버는 
+        2시간 가까이 집중력을 유지해야 한다. 여기에 코너마다 5G 이상의 압력이 몸을 짓누른다.
+      </p>
+
+      <div class="sec2-list-title">WHAT HAPPENS INSIDE THE COCKPIT</div>
+      <ul class="sec2-list">
+        <li>한 경기 동안 드라이버의 몸무게는 최대 4kg까지 줄어든다.</li>
+        <li>심박수는 180~200을 유지하며, 마라톤 러너 수준의 체력이 필요하다.</li>
+        <li>목에는 20~30kg의 무게가 반복적으로 실린 것과 같은 G-포스가 가해진다.</li>
+        <li>몸은 한계에 도달해 있지만, 머리는 냉정하게 다음 코너와 전략을 계산해야 한다.</li>
+      </ul>
+    </div>
+
+    <div class="sec2-images">
+      <div class="img-card">
+        <img src="player4.jpg" alt="">
+        <div class="img-caption">COOL UNDER PRESSURE</div>
+      </div>
+      <div class="img-card">
+        <img src="f17.jpg" alt="">
+        <div class="img-caption">HEAT OF THE TRACK</div>
+      </div>
+      <div class="img-card">
+        <img src="f18.jpg" alt="">
+        <div class="img-caption">RISING SMOKE</div>
+      </div>
+      <div class="img-card">
+        <img src="f19.jpg" alt="">
+        <div class="img-caption">SURVIVAL RACE</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHITE SECTION – ABOUT + LOSE 4 KILOS -->
+  <section class="section-white">
+    <div class="white-top">
+      <div>
+        <h2>ABOUT SURVIVAL</h2>
+        <p>
+          F1은 단순히 “누가 더 빨리 가는가”의 문제가 아니다.  
+          시속 300km의 속도, 타이어가 비명을 지르는 코너, 그리고 언제든 사고로 이어질 수 있는 위험.  
+          이 모든 것을 버티는 순간, 드라이버는 단순한 선수에서 “생존자”가 된다.
+        </p>
+      </div>
+      <div class="register-box">
+        <h3>BECOME A SURVIVOR</h3>
+        <p>
+          레이싱의 이면을 따라가고 싶다면,  
+          극한의 환경 속에서 버티는 인간의 이야기에 관심이 있다면  
+          이 프로젝트와 함께해라.
+        </p>
+        <span class="btn-red">REGISTER</span>
+      </div>
+    </div>
+
+    <div class="white-bottom">
+      <div>
+        <h3>LOSE 4 KILOS IN A SINGLE RACE</h3>
+        <p>
+          레이스카 내부의 온도는 최대 60도까지 올라가고,
+          방열 효과가 제한적인 콕핏 안에서 드라이버는 2시간 가까이
+          집중력을 유지해야 한다. 숨을 고르고, 스티어링 휠을 쥐고,
+          브레이크와 엑셀을 반복하는 동안 몸에서는 4리터 가까운 땀이 빠져나간다.<br><br>
+          그래서 한 경기가 끝나면 드라이버의 몸무게는 4킬로그램 정도 줄어든다.
+          그 무게만큼 사라진 것은 단순한 수분이 아니라,
+          트랙 위에서 버텨낸 시간과 집중, 그리고 생존 그 자체이다.
+        </p>
+      </div>
+      <div class="white-img">
+        <img src="f19.jpg" alt="Lose 4 kilos">
+      </div>
+    </div>
+  </section>
+
+  <!-- VICTORY 카드 -->
+  <section class="section-cards">
+    <div class="cards-title">VICTORY STORIES</div>
+
+    <div class="card-row">
+      <div class="card">
+        <div class="card-img">
+          <img src="player4.jpg" alt="">
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            COOL UNDER PRESSURE<br>CALM MIND, SHARP FOCUS
+          </div>
+          F1 드라이버는 시속 300km 속에서도 머릿속은 차갑게 유지해야 한다.
+          공포, 흥분, 긴장감 속에서 진짜 승부를 가르는 것은
+          “얼마나 차분하게 결정할 수 있는가” 이다.
+        </div>
+        <span class="btn-red card-btn">READ MORE</span>
+      </div>
+
+      <div class="card">
+        <div class="card-img">
+          <img src="f17.jpg" alt="">
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            THE HEAT OF THE TRACK<br>THE FIRE THAT DRIVES CHAMPIONS
+          </div>
+          트랙 위의 열기, 엔진과 타이어에서 올라오는 뜨거운 공기.
+          그 열기 속에서 숨을 쉬고, 그 열기를 파고들며 드라이버는 다시 태어난다.
+        </div>
+        <span class="btn-red card-btn">READ MORE</span>
+      </div>
+
+      <div class="card">
+        <div class="card-img">
+          <img src="f18.jpg" alt="">
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            RISING SMOKE, RISING HEARTS<br>POWER AT FULL THROTTLE
+          </div>
+          엔진의 폭발음과 함께 피트 건물 사이로 연기가 피어오른다.
+          그 순간, 관중의 심장도 동시에 요동친다.
+        </div>
+        <span class="btn-red card-btn">READ MORE</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERESTING THINGS ABOUT F1 -->
+  <section class="section-dark-alt">
+    <div>
+      <h2>INTERESTING THINGS ABOUT F1</h2>
+      <p>
+        F1 드라이버는 시속 300km에서도 책의 문장을 읽을 수 있을 정도로
+        시야가 안정적이라고 말한다. 차체와 서스펜션이 진동을 최대한
+        억제하도록 설계되어 있기 때문이다.
+      </p>
+      <p>
+        하지만 “보인다”는 것과 “판단할 수 있다”는 것은 다르다.
+        그 속도에서 정보를 인식하고, 동시에 다음 코너와 타이어 상태,
+        연료 전략까지 계산해야 한다는 점에서 F1은 인간 뇌의 한계를 시험하는 스포츠다.
+      </p>
+
+      <div class="fact">
+        · 경주 중 심박수 180~200 유지<br>
+        · 전투기 조종사 수준의 G-포스를 연속으로 견뎌야 함<br>
+        · 목, 코어 근육을 위한 특수 트레이닝 필수
+      </div>
+    </div>
+    <div class="dark-alt-img">
+      <img src="f14.jpg" alt="Drivers">
+    </div>
+  </section>
+
+  <!-- F1 팀은 왜 수가 적을까 -->
+  <section class="section-teams">
+    <h2>F1 팀은 왜 수가 적을 수밖에 없는가?</h2>
+
+    <div class="teams-grid">
+      <div>
+        <div class="teams-col-title">MONEY</div>
+        <div class="teams-body">
+          F1 한 팀을 운영하기 위한 연간 예산은 수천억 단위에 이른다.
+          차 한 대, 연구 개발, 장비, 물류, 인건비까지 모든 것이 비싸다.
+          그렇기 때문에 아무 팀이나 참가할 수 없고, 팀 수는 자연스럽게 제한된다.
+          “들어오는 것”보다 “버티는 것”이 더 어렵다.
+        </div>
+        <span class="btn-red" style="font-size:10px;">JOIN YOUR SPORTS</span>
+      </div>
+      <div>
+        <div class="teams-col-title">TECHNOLOGY</div>
+        <div class="teams-body">
+          F1 머신은 사실상 “바퀴 달린 전투기”에 가깝다.
+          공기역학, 엔진 설계, 에너지 회수 시스템, 데이터 분석 등
+          첨단 기술이 결합되어 있고, 이를 감당하고 유지할 수 있는 회사는
+          전 세계에서도 극히 제한적이다.
+        </div>
+        <span class="btn-red" style="font-size:10px;">JOIN YOUR SPORTS</span>
+      </div>
+      <div>
+        <div class="teams-col-title">TEAM</div>
+        <div class="teams-body">
+          한 팀에는 수백 명에서 천 명이 넘는 인원이 필요하다.
+          드라이버는 그중 단 두 명일 뿐이다.
+          레이스 전략, 타이어, 엔진, 섀시, 데이터, 마케팅까지.
+          수많은 사람들이 함께 움직일 때 비로소 한 대의 차가 트랙 위를 달릴 수 있다.
+        </div>
+        <span class="btn-red" style="font-size:10px;">JOIN YOUR SPORTS</span>
+      </div>
+    </div>
+
+    <div class="teams-cta-wrap">
+      <h3 style="font-size:20px;font-weight:900;">
+        F1은 “들어가는 것”보다 “버티는 것”이 더 어려운 세계
+      </h3>
+      <p>
+        돈, 기술, 사람. 이 세 가지를 동시에 갖춘 팀만이 이 무대에 설 수 있고,  
+        그 상태를 몇 년씩 유지하는 팀만이 “전통의 팀”이 된다.
+      </p>
+      <span class="btn-red" style="margin-top:10px;">JOIN YOUR SPORTS</span>
+    </div>
+  </section>
+
+  <!-- DRIVERS & CRASH -->
+  <section class="section-drivers">
+    <div class="drivers-block">
+      <div class="drivers-img">
+        <img src="player3.jpg" alt="Ayrton Senna">
+      </div>
+      <div>
+        <div class="driver-tag">경기 중 요절한 선수</div>
+        <div class="driver-name">AYRTON SENNA</div>
+        <div class="driver-text">
+          F1 역사상 가장 위대한 드라이버 중 한 명으로 불리는 아일톤 세나.
+          1994년 산마리노 그랑프리 도중 탬부렐로 코너에서의 사고로 세상을 떠났다.<br><br>
+          그의 죽음은 전 세계에 큰 충격을 주었고, 그 이후 F1의 트랙 설계,
+          차체 강도, 헬멧, 의료 시스템까지 안전 규정은 근본적으로 바뀌게 되었다.
+        </div>
+      </div>
+    </div>
+
+    <div class="drivers-block">
+      <div class="drivers-img">
+        <img src="player2.jpg" alt="Roland Ratzenberger">
+      </div>
+      <div>
+        <div class="driver-tag">경기 중 요절한 선수</div>
+        <div class="driver-name">ROLAND RATZENBERGER</div>
+        <div class="driver-text">
+          세나와 같은 주말, 예선에서 프런트윙이 파손된 상태로 고속 주행을 이어가다
+          벽과 충돌해 사망한 롤란트 라첸베르거.<br><br>
+          이 연속된 두 사고는 F1 역사상 가장 충격적인 주말로 기록되며,
+          현대 F1 안전 규정의 출발점이 되었다.
+        </div>
+      </div>
+    </div>
+
+    <div class="crash-banner">
+      <img src="f18.jpg" alt="Crash">
+      <div class="crash-text">
+        이 연속된 두 사고는<br>
+        F1 역사에서 가장 충격적인<br>
+        주말로 기록되었다
+      </div>
+      <div class="crash-label">SURVIVAL</div>
+    </div>
+  </section>
+
+  <!-- 마지막 인용 -->
+  <section class="section-quote-final">
+    <div class="label">ABOUT RACING</div>
+    <div class="main">
+      레이싱은 속도의 이야기가 아니다.<br>
+      끝까지 버티는, 살아남는 자의 이야기다.
+    </div>
+    <span class="btn-red">SURVIVAL</span>
+  </section>
+
+  <!-- CONTACTS -->
+  <footer>
+    <div>
+      <h2>CONTACTS</h2>
+      <form class="contact-form">
+        <input type="text" placeholder="Name">
+        <input type="email" placeholder="Email">
+        <textarea placeholder="Message about F1 survival..."></textarea>
+        <span class="btn-red" style="text-align:center;">SEND</span>
+      </form>
+    </div>
+
+    <div class="footer-info">
+      <strong>TEAM GARAGE · F1 SURVIVAL</strong>
+      Email: team@f1.com<br>
+      팀 수: 10팀 · 드라이버: 20명<br>
+      연간 팀 예산: 약 1000억 원<br><br>
+      RACING · SURVIVAL · ENGINE · HEAT
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 F1 Survival Project</span>
+      <span>MEDIA CENTRE</span>
+    </div>
+  </footer>
+
+</div>
+</body>
+<script>
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('show');
+      }
+    })
+  });
+
+  document.querySelectorAll('.fade-up, .slide-left, .slide-right').forEach(el=>{
+    obs.observe(el);
+  });
+</script>
+
+</html>
